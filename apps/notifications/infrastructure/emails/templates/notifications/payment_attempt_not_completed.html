@@ -1,0 +1,19 @@
+{% extends 'email_base.html' %}
+{% load i18n %}
+{% block cuerpo %}
+    {% autoescape off %}
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">Hola <b> {{ data.student_name }}</b>👋</p>
+
+        <p style="font-size: 1.1rem;font-family: 'Roboto', sans-serif; font-weight: bold;">
+            Hemos identificado que el intento de pago realizado recientemente no pudo ser completado.
+
+            Esto puede deberse a diferentes motivos, como fondos insuficientes, restricciones del banco emisor o validaciones de seguridad del método de pago.
+        </p>
+        <p style="font-size: 1.1rem;font-family: 'Roboto', sans-serif; font-weight: bold;">
+             Te invitamos a intentar nuevamente utilizando el botón de pago disponible en la plataforma. Si el inconveniente persiste, puedes probar con otro método de pago o contactar a tu entidad bancaria para más información.
+
+            Si necesitas asistencia adicional, no dudes en contactaR a tu asesor académico o a nuestro equipo de soporte.
+        </p>
+
+    {% endautoescape %}
+{% endblock cuerpo %}

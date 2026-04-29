@@ -1,0 +1,54 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ _('Orden de Pago | LC mundo') }}</title>
+
+</head>
+    <body>
+        <div class="header">
+            <div class="logo"><img src="https://www.lcmundo.com/static/img/logos/Logo-LC-Verde.png" alt="LC Mundo"/></div>
+            <div class="social">
+                {% include '../partials/social_networks.html' %}
+                <div class="future">Your Future, Our Passion</div>
+            </div>
+        </div>
+        <div class="pagina">
+            {% include '../partials/student_personal_information.html' %}
+
+            {% if data.program %}
+                <hr>
+               {% include '../partials/supplier_information.html' %}
+            {% endif %}
+
+            {% include '../partials/payment_details_table.html' %}
+
+            <hr style="margin: 5px 0;">
+            <h3><strong>NOTA:</strong></h3>
+            <p>La orden N° {{ data.order_number }} debe realizarse antes del {{ data.link_expires_at }}.</p>
+            {% if data.suggested_payment_amount_texto %}
+                <p>
+                    Monto sugerido para la primera cuota: {{ data.currency }} {{ data.suggested_payment_amount_texto }}.<br>
+                    Podrás realizar hasta 4 pagos o más según tu caso particular.
+                </p>
+            {% endif %}
+            {% if data.payment_count %}
+                <p>
+                <strong>PROGRESO DE PAGOS:</strong><br>
+                • Cuotas pagadas: {{ data.payment_count }}<br>
+                • Total pagado: {{ data.currency }} {{ data.total_paid }} de {{ data.currency }} {{ data.total_order }}<br>
+                • Saldo pendiente: {{ data.currency }} {{ data.balance_due }}
+
+            </p>
+            {% endif %}
+
+        </div>
+        <div class="footer">
+            {% include '../partials/footer.html' %}
+        </div>
+    </body>
+</html>

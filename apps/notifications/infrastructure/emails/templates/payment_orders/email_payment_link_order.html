@@ -1,0 +1,43 @@
+{% extends 'email_base.html' %}
+{% load i18n %}
+
+{% block cuerpo %}
+    {% autoescape off %}
+        <h3 style="font-size: 1rem;font-family: 'Roboto', sans-serif;text-align: center;">GRACIAS POR INICIAR EL PROCESO DEPAGO</h3>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;"><b>Hola {{ data.student.name }}</b>👋</p>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            ¡Gracias por avanzar con nosotros!
+        </p>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Hemos generado tu <b>Orden de Pago Nº {{ data.order_number }} </b> y estamos listos para el siguiente paso.
+        </p>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif; font-weight: bold;">
+            👉 Realiza tu pago a través del siguiente link:
+        </p>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;margin-top: 2rem;">
+            <a style="margin-top: 25px; background-color: #00d88a;color: #FFF; cursor: pointer;font-weight: bold; padding: 7px 12px; border: 1px solid transparent;border-radius: 8px;text-decoration: none;"
+               href="{{ enlace }}">Pagar aquí</a>
+        </p>
+
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;margin-top: 2rem;">
+            Además, te dejamos adjunto el PDF de tu orden de pago con todos los detalles: concepto, monto y fecha de
+            validez.<br>
+            ⏳ Recuerda que el enlace estará activo por 7 días.
+        </p>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Si es tu primera vez en nuestro sistema, necesitas restablecer tu
+            contraseña, podrás hacerlo directamente desde nuestra página web cuando accedas al enlace de pago.<br><br>
+            Si tienes alguna pregunta, no dudes en contactar a tu asesor académico asignado.
+        </p>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Gracias por confiar en LC Mundo.
+        </p>
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Estamos muy felices de acompañarte en este emocionante camino
+            hacia tu experiencia internacional. 🌍✈️
+        </p>
+    {% endautoescape %}
+{% endblock cuerpo %}
+

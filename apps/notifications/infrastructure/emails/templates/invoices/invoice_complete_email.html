@@ -1,0 +1,76 @@
+{% extends 'email_base.html' %}
+{% load i18n %}
+
+{% block cuerpo %}
+    {% autoescape off %}
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">Hola <b> {{ data.student.name }}</b>👋</p>
+
+        <p style="font-size: 1.1rem;font-family: 'Roboto', sans-serif; font-weight: bold; color: #4CAF50;">
+            ¡Excelentes noticias! Has completado tu pago exitosamente. 🎊
+        </p>
+
+        <div style="background-color: #E8F5E9; border-left: 4px solid #4caf50; padding: 15px; margin: 20px 0; border-radius: 5px;">
+            <p style="font-weight:bold;font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 5px 0;">
+                 ✅ Información del Pago Realizado
+            </p>
+            <ul style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 10px 0; padding-left: 20px;">
+                <li style="margin-bottom: .2rem;"> <strong>Factura Nº:</strong> {{ data.invoice_number }}</li>
+            </ul>
+            {% for c in data.payment %}
+
+                <ul style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 10px 0; padding-left: 20px;">
+                    <li style="margin-bottom: .2rem;"><strong>Fecha de Emisión:</strong> {{ c.payment_date }}</li>
+                    <li style="margin-bottom: .2rem;"><strong>Referencia del pago Nº:</strong> {{ c.payment_reference_number }}</li>
+                    <li style="margin-bottom: .2rem;"><strong>Nombre del Pagador:</strong> {{ c.payer_name }}</li>
+                    <li style="margin-bottom: .2rem;"><strong style="font-size: 1.1rem;">Total Pagado:</strong> {{ c.currency }} {{ c.amount}}</li>
+                </ul>
+
+            {% endfor %}
+        </div>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            📎 <strong>Adjunto encontrarás tu factura completa en formato PDF.</strong>
+        </p>
+
+
+        <div style="background-color: #E3F2FD; border-left: 4px solid #2196F3; padding: 15px; margin: 20px 0; border-radius: 5px;">
+            <p style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 5px 0;">
+                ℹ️ <strong>Información Importante:</strong>
+            </p>
+            <ul style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 10px 0; padding-left: 20px;">
+                <li>Este documento es tu comprobante oficial de pago.</li>
+                <li>Conserva esta factura para tus registros.</li>
+                <li>Puedes descargarla desde tu perfil en cualquier momento.</li>
+            </ul>
+        </div>
+
+        <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 15px; margin: 20px 0; border-radius: 5px;">
+            <p style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 5px 0;">
+                📋 <strong>Próximos Pasos:</strong>
+            </p>
+            <ol style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 10px 0; padding-left: 20px;">
+                <li>Tu asesor académico te contactará para confirmar los siguientes pasos.</li>
+                <li>Recibirás información adicional sobre tu programa en los próximos días.</li>
+                <li>Si tienes alguna pregunta, no dudes en contactarnos.</li>
+            </ol>
+        </div>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Agradecemos tu confianza en <strong>LC Mundo</strong> para tu experiencia internacional.
+        </p>
+
+        <p style="font-size: 1.1rem;font-family: 'Roboto', sans-serif; font-weight: bold; color: #2196F3;">
+            ¡Estamos emocionados de acompañarte en esta aventura! 🌍✈️
+        </p>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin-top: 30px;">
+            Si necesitas asistencia o tienes preguntas sobre tu factura,
+            por favor contacta a tu asesor académico o a nuestro equipo de soporte.
+        </p>
+        <p style="font-size: 0.9rem;font-family: 'Roboto', sans-serif; color: #666; margin-top: 30px;">
+            <em>Este es un correo automático. Por favor, no respondas a este mensaje.</em>
+        </p>
+    {% endautoescape %}
+{% endblock cuerpo %}
+

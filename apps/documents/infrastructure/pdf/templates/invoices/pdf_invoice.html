@@ -1,0 +1,88 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>{{ _('Invoice | LC mundo') }}</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo"><img src="https://www.lcmundo.com/static/img/logos/Logo-LC-Verde.png" alt="LC Mundo"/></div>
+            <div class="social">
+                {% include '../partials/social_networks.html' %}
+                <div class="future">Your Future, Our Passion</div>
+            </div>
+        </div>
+        <div class="pagina">
+            {% include '../partials/student_personal_information.html' %}
+
+            {% if data.program %}
+                <hr>
+                {% include '../partials/supplier_information.html' %}
+            {% endif %}
+
+            {% include '../partials/payment_details_table.html' %}
+
+            <h3><strong>NOTA:</strong></h3>
+            <p>{{ data.note }}.</p>
+
+          <!-- PROGRESO DE PAGOS -->
+            {% if data.payment_count %}
+                 <hr style="margin: 5px 0;">
+                <h3 style="margin-top: 2rem;"><strong>HISTORIAL DE PAGO PENDIENTE:</strong></h3>
+                <p>• Cuotas pagadas: {{ data.payment_count }}</p>
+                <p>• Total pagado: {{ data.currency }} {{ data.total_paid }} de {{ data.currency }} {{ data.total_invoice }}</p>
+                <p>• Saldo pendiente: {{ data.currency }} {{ data.balance_due }}</p>
+
+            {% endif %}
+              <!-- PAGOS EFECTUADOS -->
+            {% if data.payment and not data.payment_count %}
+                 <hr style="margin: 5px 0;">
+                <h3 style="margin-top: 1rem;"><strong>HISTORIAL DE PAGOS RECIBIDO:</strong></h3>
+
+                <div class="pagos-container">
+                    {% for c in data.payment %}
+                        <div class="pago-item">
+                            <ul>
+                                <li><strong>Factura Nº:</strong> {{ data.invoice_number }}</li>
+                                <li><strong>Fecha de Pago:</strong> {{ c.payment_date }}</li>
+                                <li><strong>Referencia del pago Nº:</strong> {{ c.payment_reference_number }}</li>
+                                <li><strong>Nombre del Pagador:</strong> {{ c.payer_name }}</li>
+                                <li><strong style="font-size: 1rem;">Monto {% if data.status == 'E' %} Exonerado {% else %} Pagado {% endif %}:</strong> {{ c.currency }} {{ c.amount }}</li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if data.payment and data.payment_count %}
+            <!-- Nueva página para pagos cuando: hay credits O hay más de 2 pagos sin credits -->
+            <div class="pagina pagina-pagos">
+                <h3 style="padding-top: 6rem;"><strong>{% if data.payment|length == 1 %}INFORMACION DEL PAGO RECIBIDO{% else %}INFORMACION DE LOS PAGOS RECIBIDOS{% endif %}:</strong></h3>
+                <hr style="margin: 5px 0;">
+                <div class="pagos-container">
+                    {% for c in data.payment %}
+                        <div class="pago-item">
+                            <ul>
+                                <li><strong>Factura Nº:</strong> {{ data.invoice_number }}</li>
+                                <li><strong>Fecha de Pago:</strong> {{ c.payment_date }}</li>
+                                <li><strong>Referencia del pago Nº:</strong> {{ c.payment_reference_number }}</li>
+                                <li><strong>Nombre del Pagador:</strong> {{ c.payer_name }}</li>
+                                <li><strong style="font-size: 1rem;">Pagado:</strong> {{ c.currency }} {{ c.amount }}</li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% include '../partials/terms_and_conditions.html' %}
+        <div class="footer">
+           {% include '../partials/footer.html' %}
+        </div>
+    </body>
+</html>

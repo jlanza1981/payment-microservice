@@ -1,0 +1,68 @@
+{% extends 'email_base.html' %}
+{% load i18n %}
+
+{% block cuerpo %}
+    {% autoescape off %}
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;"><b>Hola {{ data.student.name }}</b>👋</p>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            ¡Hemos recibido tu pago con éxito! 🎉
+        </p>
+
+        <div style="background-color: #E8F5E9; border-left: 4px solid #4CAF50; padding: 15px; margin: 20px 0; border-radius: 5px;">
+            <p style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 5px 0;">
+                <strong>Recibo Nº:</strong> {{ data.receipt_number }}
+            </p>
+           <ul style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 10px 0; padding-left: 20px;">
+                <li style="margin-bottom: .2rem;"> <strong>Factura Nº:</strong> {{ data.invoice.invoice_number }}</li>
+                <li style="margin-bottom: .2rem;"><strong>Fecha del pago:</strong> {{ data.payment.payment_date }}</li>
+                <li style="margin-bottom: .2rem;"><strong>Referencia del pago Nº:</strong> {{ data.payment.payment_reference }}</li>
+                <li style="margin-bottom: .2rem;"><strong>Nombre del Pagador:</strong> {{ data.payment.payer_name }}</li>
+            </ul>
+        </div>
+
+        <div style="background-color: #FFF9C4; border: 2px solid #FFC107; padding: 20px; margin: 20px 0; border-radius: 8px;">
+            <h4 style="font-size: 1.1rem;font-family: 'Roboto', sans-serif; margin: 0 0 15px 0; color: #F57C00;">
+                💰 Resumen de tu Pago
+            </h4>
+            <p class="amount-title">
+                <strong>Monto Pagado:</strong>
+                <span class="amount-paid text-green">
+                    {{ data.currency }} {{ data.amount_paid|floatformat:2 }}
+                </span>
+            </p>
+            <p class="amount-title">
+                <strong>Saldo Pendiente:</strong>
+                <span class="amount-paid text-yellow">
+                    {{ data.currency }} {{ data.new_balance|floatformat:2 }}
+                </span>
+            </p>
+        </div>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            📎 <strong>Adjunto encontrarás tu recibo de abono en formato PDF.</strong>
+            Este documento es válido como comprobante de pago.
+        </p>
+
+        {% if data.new_balance == 0 %}
+            <div style="background-color: #E8F5E9; border-left: 4px solid #4CAF50; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                <p style="font-size: 1rem;font-family: 'Roboto', sans-serif; margin: 5px 0;">
+                    🎊 <strong>¡Felicitaciones!</strong> Has completado el pago de tu factura.
+                </p>
+                <p style="font-size: 0.95rem;font-family: 'Roboto', sans-serif; margin: 10px 0;">
+                    Recibirás tu factura completa una vez que tesorería verifique todos los pagos.
+                </p>
+            </div>
+        {% endif %}
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Si tienes alguna pregunta sobre tu pago o necesitas más información,
+            no dudes en contactar a tu asesor académico asignado.
+        </p>
+
+        <p style="font-size: 1rem;font-family: 'Roboto', sans-serif;">
+            Gracias por confiar en <strong>LC Mundo</strong>. 🌍✈️
+        </p>
+    {% endautoescape %}
+{% endblock cuerpo %}
+

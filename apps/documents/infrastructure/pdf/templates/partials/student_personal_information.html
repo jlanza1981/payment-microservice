@@ -1,0 +1,24 @@
+<section class="info">
+    <div class="left">
+        <h4 class="payment-order-number">
+            {% if data.document == 'invoice' %}
+                INVOICE N° {{ data.invoice_number }}
+            {% endif %}
+            {% if data.document == 'payment_order' %}
+                ORDEN N° {{ data.order_number }}
+            {% endif %}
+            {% if data.document == 'receip' %}
+                RECIBO N° {{ data.receipt_number }}
+            {% endif %}
+        </h4>
+        <p><b>Cliente: </b> {{ data.student.name }}</p>
+        <p><b>Email: </b> {{ data.student.email }}</p>
+        <p><b>Código Cliente: </b> {{ data.student.customer_code }}</p>
+    </div>
+    <div class="right">
+        <p style="margin-top: 1.5rem;"><b>Fecha de Emisión:</b> {{ data.registration_date }}</p>
+        {% if data.document == 'payment_order' %}
+            <p><b>Fecha de Vencimiento:</b> {{ data.link_expires_at }}</p>
+        {% endif %}
+    </div>
+</section>

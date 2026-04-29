@@ -1,0 +1,117 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+    <title>{{ _('Enlace de Pago Onlíne | LC mundo') }}</title>
+    <link href="https://www.lcmundo.com/static/css/website/correo_enlace_pago.css" rel="stylesheet">
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" yahoo="fix">
+{% autoescape off %}
+    <div class="ui-sortable" id="sort_them">
+        <!-- Seperator 1 -->
+        <table border="0" cellpadding="0" cellspacing="0" class="full" style="font-family: Montserrat-Regular;">
+            <tbody>
+            <tr mc:repeatable>
+                <td align="center"
+                    style="background-image: url('images/seperator01.jpg'); background-position: center top; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position: center center; background-repeat: no-repeat;"
+                    id="sep1">
+                    <div mc:hideable>
+                        <!-- Wrapper -->
+                        <table class="mobile" align="center" border="0" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td align="center">
+                                    <!-- Wrapper -->
+                                    <table class="full" align="left" border="0" width="700" cellpadding="0"
+                                           cellspacing="0"
+                                           style="background: #FCF9F2;border: 1px solid #FCF9F2;box-shadow:-3px 3px 18px -3px #a39d9d;font-size: 0.95rem;">
+                                        <tbody>
+                                        <tr>
+                                            <td width="100%" align="center" style="background: #a0e000;">
+                                                <img src="https://www.lcmundo.com/static/img/logos/LOGO-LC-MUNDO-HEADER.png"
+                                                     style="width: 20%;padding: 20px;">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100%" align="left" style="padding: 5%;font-family: rubik;">
+                                                {% block cuerpo %}{% endblock cuerpo %}
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:0 5%;font-family: rubik;color: #080c38;">
+                                                <p style="margin-bottom: 0;">Atentamente, <br>El equipo de LC Mundo <br><b>Tu
+                                                    Futuro, Nuestra Passion</b></p>
+                                                {% block nota %}{% endblock nota %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 5%;font-family: rubik;">
+                                                <div style="padding:10px;border-top: 1px solid #000;">
+                                                    <a href="https://www.lcmundo.com"
+                                                       style="color: #a0e000;text-decoration: none;"><b>lcmundo</b>.com</a>
+                                                    <div style="float:right;">
+                                                        <span style="color: #a0e000;"><b>@lcmundo</b></span>
+                                                        <ul style="list-style: none;float: right;margin-top: 1px;">
+                                                            <li style="float:left;padding-right: 15px;">
+                                                                <a href="https://www.facebook.com/lcmundo/"
+                                                                   target="_blank" class="redes-social"
+                                                                   style="text-decoration:none;">
+                                                                    <img style="width:15px;"
+                                                                         src="https://lcmundo.com/static/img/template_correos/facebook.png">
+                                                                </a>
+                                                            </li>
+                                                            <li style="float:left;padding-right: 15px;">
+                                                                <a href="https://twitter.com/lcmundo" target="_blank"
+                                                                   style="text-decoration:none;">
+                                                                    <img style="width:15px;"
+                                                                         src="https://lcmundo.com/static/img/template_correos/twitter.png">
+                                                                </a>
+                                                            </li>
+                                                            <li style="float:left;padding-right: 15px;">
+                                                                <a href="https://www.instagram.com/lcmundo"
+                                                                   target="_blank" style="text-decoration:none;">
+                                                                    <img style="width:15px;"
+                                                                         src="https://lcmundo.com/static/img/template_correos/instagram.png">
+                                                                </a>
+                                                            </li>
+                                                            <li style="float:left;padding-right: 15px;">
+                                                                <a href="https://www.youtube.com/lcmundo"
+                                                                   target="_blank" style="text-decoration:none;">
+                                                                    <img style="width:15px;"
+                                                                         src="https://lcmundo.com/static/img/template_correos/youtube.png">
+                                                                </a>
+                                                            </li>
+                                                            <li style="float:left;padding-right: 15px;">
+                                                                <a href="https://www.linkedin.com/company/language-connections-ltd/"
+                                                                   target="_blank" style="text-decoration:none;">
+                                                                    <img style="width:15px;"
+                                                                         src="https://lcmundo.com/static/img/template_correos/linkedin.png">
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table><!-- End Wrapper -->
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endautoescape %}
+</body>
+
+</html>

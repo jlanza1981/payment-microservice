@@ -1,0 +1,28 @@
+<td colspan="4" style="border: 0;"></td>
+<td colspan="4" style="border: 0;padding-right: 0;">
+    <div class="total" style="{% if data.allows_partial_payment and data.suggested_payment_amount_texto %} background: #efefef; color: #000b59;{% endif %}">
+        <span class="text-total">TOTAL ORDEN:</span>
+        <span class="monto">{{ data.currency }} {{ data.total_order }}</span>
+    </div>
+    {% if data.allows_partial_payment and data.suggested_payment_amount_texto %}
+        <div class="total" style="margin-top: 1rem;">
+            <span class="text-total">
+                {% if data.next_payment_number and data.next_payment_number > 1 %}
+                    MONTO A ABONAR {{ data.next_payment_number }}:
+                {% else %}
+                    MONTO A PAGAR:
+                {% endif %}
+            </span>
+            <span class="monto">
+                {{ data.currency }}
+                {% if data.suggested_payment_amount_texto %}
+                    {{ data.suggested_payment_amount_texto }}  {# Monto abono #}
+                {% elif data.balance_due and data.balance_due > 0 and data.total_paid and data.total_paid > 0 %}
+                    <b>{{ data.balance_due }}</b> {# Saldo pendiente  #}
+                {% else %}
+                    {{ data.total_order }}  {# Total completo #}
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</td>

@@ -1,0 +1,85 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{ _('Recibo de Abono | LC Mundo') }}</title>
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo"><img src="https://www.lcmundo.com/static/img/logos/Logo-LC-Verde.png" alt="LC Mundo"/></div>
+            <div class="social">
+                {% include '../partials/social_networks.html' %}
+                <div class="future">Your Future, Our Passion</div>
+            </div>
+        </div>
+        <div class="page">
+            <!-- Información del Estudiante -->
+            {% include '../partials/student_personal_information.html' %}
+
+            <!-- Información de la Factura -->
+            <div class="info">
+                <hr>
+                <div class="left">
+                    <h4>Información de la Factura</h4>
+                    <p><b>Número de Factura:</b> {{ data.invoice.invoice_number }}</p>
+                    <p><b>Total de la Factura:</b> {{ data.invoice.currency }} {{ data.invoice.total}}</p>
+                </div>
+                <div class="right"></div>
+
+            </div>
+
+            <!-- Resumen del Pago -->
+            <div class="payment-summary">
+                <table class="table">
+                    <tr>
+                        <th colspan="2" class="summary-table-title">
+                            <h3 style="text-align: center;">💳 Detalles del Pago</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Número de Pago:</td>
+                        <td>{{ data.payment.payment_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de Pago:</td>
+                        <td>{{ data.payment.payment_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Método de Pago:</td>
+                        <td>{{ data.payment.payment_method }}</td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="2" class="summary-table-title">
+                            <h3 style="text-align: center;">💰 Resumen del Pago</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Saldo Anterior:</td>
+                        <td>{{ data.payment.currency }} {{ data.previous_balance|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Monto Pagado:</td>
+                        <td>{{ data.payment.currency }} {{ data.amount_paid|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nuevo Saldo Pendiente:</td>
+                        <td>{{ data.currency }} {{ data.new_balance|floatformat:2 }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="footer-highlight">
+                ✓ ¡Gracias por su pago! Este es un comprobante válido de su abono.
+            </div>
+        </div>
+       <div class="footer">
+            {% include '../partials/footer.html' %}
+        </div>
+    </body>
+</html>

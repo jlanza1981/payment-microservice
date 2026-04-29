@@ -1,0 +1,32 @@
+<table class="detail">
+    <thead>
+        <tr>
+            <th>DESCRIPCIÓN</th>
+            <th>PRECIO</th>
+            <th>CANTIDAD</th>
+            <th>UNIDAD</th>
+            <th>DESCUENTO.</th>
+            <th>SUB TOTAL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for concepts in data.payment_concepts %}
+            <tr>
+                <td class="text-start">{{ concepts.payment_type_name }}</td>
+                <td class="text-center">{{ concepts.amount }}</td>
+                <td class="text-center">{{ concepts.quantity }}</td>
+                <td class="text-center">{{ concepts.unit }}</td>
+                <td class="text-center">{{ concepts.discount_amount }} {% if concepts.discount_amount == 'percentage' %}
+                    %{% endif %}</td>
+                <td class="text-end">{{ concepts.sub_total }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            {% if data.document == 'invoice' %}
+                {% include '../partials/amount_to_pay(invoice).html' %}
+            {% else %}
+                {% include '../partials/amount_to_pay(payment_order).html' %}
+            {% endif %}
+        </tr>
+    </tbody>
+</table>

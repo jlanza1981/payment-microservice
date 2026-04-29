@@ -1,0 +1,17 @@
+<h3 class="" style="margin-bottom: 0.5rem;">PROVEEDOR</h3>
+<section class="info" style="margin-top: 0; margin-bottom: 2rem;">
+    <div class="left">
+        <p><b>Institución:</b> {{ data.program.institution }}</p>
+        <p><b>Programa</b>: {{ data.program.program_name }}{% if data.program.intensity %} / {{ data.program.intensity }}{% endif %}</p>
+    </div>
+    <div class="right">
+        <p><b>Duración:</b> {{ data.program.duration }} {{ data.program.duration_type }}</p>
+        <p>
+            <b>Fecha:</b>
+            {{ data.program.start_date }}
+            {% if data.program.end_date %}
+                – {{ data.program.end_date }}
+            {% endif %}
+        </p>
+    </div>
+</section>
