@@ -45,6 +45,7 @@ class ProcessPaymentCommand:
     provider_transaction_id: str    # capture_id, charge_id, etc.
     amount: Decimal
     currency: str
+    payment_method: str = None           # ej. 'PP' para PayPal, 'ST' para Stripe
     additional_data: dict = None    # cualquier info extra del proveedor
     payer_name: str = None          # Nombre del pagador
 

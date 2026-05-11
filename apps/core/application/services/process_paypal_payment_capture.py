@@ -141,6 +141,7 @@ class ProcessPaypalPaymentCaptureService:
             provider_transaction_id=paypal_data.capture_id,
             amount=Decimal(seller_receivable_breakdown['net_amount']['value']),  #monto real del pago
             currency=paypal_data.currency,
+            payment_method='PP',
             payer_name=paypal_data.payer_name
         )
         is_full_payment = command.amount >= payment_order.total_order
@@ -175,6 +176,7 @@ class ProcessPaypalPaymentCaptureService:
             provider_transaction_id=paypal_data.capture_id,
             amount=Decimal(seller_receivable_breakdown['net_amount']['value']),  # monto real del pago
             currency=paypal_data.currency,
+            payment_method='PP',
             payer_name=paypal_data.payer_name
         )
         payment = self.process_payment_uc.create_payment(invoice, command, is_full_payment)
