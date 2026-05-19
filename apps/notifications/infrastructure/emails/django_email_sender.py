@@ -5,8 +5,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from apps.notifications_message.domain.entities.email_data import EmailData
-from apps.notifications_message.domain.ports.email_sender import EmailSender
+from apps.notifications.domain.entities.email_data import EmailData
+from apps.notifications.domain.ports.email_sender import EmailSender
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,13 @@ class DjangoEmailSender(EmailSender):
         else:
             body = email_data.body or ""
 
+        # Manejar correctamente el campo bcc (puede ser None o una lista)
+        bcc_list = email_data.bcc if email_data.bcc is not None else []
+
+        # Debug
+        if bcc_list:
+            logger.info(f"📧 Enviando email con BCC a: {', '.join(bcc_list)}")
+
         # Crear email
         email = EmailMultiAlternatives(
             subject=email_data.subject,
@@ -47,7 +54,7 @@ class DjangoEmailSender(EmailSender):
             from_email=email_data.from_email or settings.EMAIL_HOST_USER,
             to=email_data.recipients,
             cc=email_data.cc or [],
-            bcc=email_data.bcc or []
+            bcc=bcc_list
         )
         emails_sent = ', '.join(email_data.recipients)
         # Agregar versión HTML

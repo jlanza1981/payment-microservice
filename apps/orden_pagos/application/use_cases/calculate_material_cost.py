@@ -1,3 +1,4 @@
+        total_cost, type_description = self._calculate_material_total(
 from decimal import Decimal
 from typing import Dict, Any, Callable, Optional
 
@@ -11,6 +12,11 @@ class CalculateMaterialCostUseCase:
     """
 
     COST_TYPE_CONFIG: Dict[str, tuple[str, Callable[[Decimal, int, int, int], Decimal]]] = {
+        'S': ('Semanal', lambda base, weeks, months, duration: base * (weeks or 0)),
+        'M': ('Mensual', lambda base, weeks, months, duration: base * (months or 0)),
+        'A': ('Anual', lambda base, weeks, months, duration: base),
+        'T': ('Semestral', lambda base, weeks, months, duration: base * 2),
+        'C': ('Programa Completo', lambda base, weeks, months, duration: base),
         'S': ('Semanal', lambda base, weeks, months, duration: base * (weeks or 0)),
         'M': ('Mensual', lambda base, weeks, months, duration: base * (months or 0)),
         'A': ('Anual', lambda base, weeks, months, duration: base),
